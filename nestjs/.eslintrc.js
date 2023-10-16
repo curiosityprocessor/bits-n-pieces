@@ -11,7 +11,7 @@ module.exports = {
     "plugin:prettier/recommended",
   ],
   root: true,
-env: {
+  env: {
     node: true,
     jest: true,
   },
@@ -24,6 +24,7 @@ env: {
     indent: ["error", 2],
     quotes: ["error", "double"],
     camelcase: "error",
-    "no-duplicate-imports": ["error"]
+    "no-duplicate-imports": ["error"],
+    "prettier/prettier": ["error", { endOfLine: "auto" }],
   },
 };

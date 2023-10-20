@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Get,
   HttpCode,
@@ -7,6 +8,7 @@ import {
   Put,
 } from "@nestjs/common";
 import { TransactionService } from "@src/module/pay/transaction.service";
+import { PostTransactionRequestDto } from "@src/module/pay/dto/transaction";
 
 @Controller("transactions")
 export class TransactionController {
@@ -26,7 +28,12 @@ export class TransactionController {
 
   @HttpCode(HttpStatus.CREATED)
   @Post()
-  createTransaction(): void {
+  createTransaction(@Body() dto: PostTransactionRequestDto): void {
+    console.log(
+      `POST: [/pay/transactions]
+        dto: ${JSON.stringify(dto)}
+        ${Number.isFinite(dto.amount)}`,
+    );
     return;
   }
 

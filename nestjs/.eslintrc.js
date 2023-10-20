@@ -21,7 +21,7 @@ module.exports = {
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-explicit-any": "off",
-    indent: ["error", 2],
+    indent: ["error", 2, { ignoredNodes: ["PropertyDefinition"] }],
     quotes: ["error", "double"],
     camelcase: "error",
     "no-duplicate-imports": ["error"],

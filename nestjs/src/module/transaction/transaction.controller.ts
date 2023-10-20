@@ -7,8 +7,8 @@ import {
   Post,
   Put,
 } from "@nestjs/common";
-import { TransactionService } from "@src/module/pay/transaction.service";
-import { PostTransactionRequestDto } from "@src/module/pay/dto/transaction";
+import { TransactionService } from "@src/module/transaction/transaction.service";
+import { PostTransactionRequestDto } from "@src/module/transaction/dto/transaction";
 
 @Controller("transactions")
 export class TransactionController {

@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 
 @Injectable()
-export class PayService {
+export class TransactionService {
   public ping() {
     return "pong";
   }

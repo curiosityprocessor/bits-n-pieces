@@ -6,50 +6,44 @@ import {
   Post,
   Put,
 } from "@nestjs/common";
-import { PayService } from "@src/module/pay/pay.service";
+import { TransactionService } from "@src/module/pay/transaction.service";
 
-@Controller("pay")
-export class PayController {
-  constructor(private readonly payService: PayService) {}
+@Controller("transactions")
+export class TransactionController {
+  constructor(private readonly transactionService: TransactionService) {}
 
   @HttpCode(HttpStatus.OK)
   @Get("ping")
   ping(): string {
-    return this.payService.ping();
+    return this.transactionService.ping();
   }
 
   @HttpCode(HttpStatus.OK)
-  @Get("orders")
-  orders(): any[] {
-    return [];
-  }
-
-  @HttpCode(HttpStatus.OK)
-  @Get("transactions")
+  @Get()
   payments(): any[] {
     return [];
   }
 
   @HttpCode(HttpStatus.CREATED)
-  @Post("transactions")
+  @Post()
   createTransaction(): void {
     return;
   }
 
   @HttpCode(HttpStatus.OK)
-  @Put("transactions/:transactionId")
+  @Put(":transactionId")
   updateTransaction(): void {
     return;
   }
 
   @HttpCode(HttpStatus.CREATED)
-  @Post("transactions/:transactionId/cancel")
+  @Post(":transactionId/cancel")
   cancelTransaction(): void {
     return;
   }
 
   @HttpCode(HttpStatus.CREATED)
-  @Post("transactions/callback")
+  @Post("callback")
   transactionCallback(): void {
     return;
   }

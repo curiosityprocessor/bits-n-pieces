@@ -28,13 +28,13 @@ export class TransactionController {
 
   @HttpCode(HttpStatus.CREATED)
   @Post()
-  createTransaction(@Body() dto: PostTransactionRequestDto): void {
+  createTransaction(@Body() dto: PostTransactionRequestDto): Promise<void> {
     console.log(
       `POST: [/pay/transactions]
         dto: ${JSON.stringify(dto)}
         ${Number.isFinite(dto.amount)}`,
     );
-    return;
+    return this.transactionService.createTransaction(dto);
   }
 
   @HttpCode(HttpStatus.OK)

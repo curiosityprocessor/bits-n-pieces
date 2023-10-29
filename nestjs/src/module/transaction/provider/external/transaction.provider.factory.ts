@@ -1,6 +1,6 @@
 import { Injectable, NotImplementedException } from "@nestjs/common";
 import PAYMENT_PROVIDER from "@src/module/transaction/interface/transaction.provider";
-import TossTransactionProvider from "@src/module/transaction/factory/toss.transaction.provider";
+import TossTransactionProvider from "@src/module/transaction/provider/external/toss.transaction.provider";
 
 @Injectable()
 class TransactionProviderFactory {

@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { PostTransactionRequestDto } from "@src/module/transaction/dto/transaction";
-import TransactionProviderFactory from "./factory/transaction.provider.factory";
+import TransactionProviderFactory from "@src/module/transaction/provider/external/transaction.provider.factory";
 
 @Injectable()
 export class TransactionService {

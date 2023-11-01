@@ -31,8 +31,7 @@ export class TransactionController {
   createTransaction(@Body() dto: PostTransactionRequestDto): Promise<void> {
     console.log(
       `POST: [/pay/transactions]
-        dto: ${JSON.stringify(dto)}
-        ${Number.isFinite(dto.amount)}`,
+        dto: ${JSON.stringify(dto)}`,
     );
     return this.transactionService.createTransaction(dto);
   }

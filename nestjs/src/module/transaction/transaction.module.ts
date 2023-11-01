@@ -6,9 +6,11 @@ import TossTransactionProvider from "@src/module/transaction/provider/external/t
 import TossPaymentApi from "@src/module/transaction/api/toss.payment.api";
 import { RequestToTossTransformer } from "@src/module/transaction/transformer/request-to-toss.transformer";
 import { HttpModule } from "@nestjs/axios";
+import { transactionProviders } from "@src/module/transaction/provider/repository/transaction.provider";
+import { DatabaseModule } from "@src/module/global/database/database.module";
 
 @Module({
-  imports: [HttpModule],
+  imports: [HttpModule, DatabaseModule],
   controllers: [TransactionController],
   providers: [
     TransactionService,
@@ -16,6 +18,7 @@ import { HttpModule } from "@nestjs/axios";
     TossTransactionProvider,
     TossPaymentApi,
     RequestToTossTransformer,
+    ...transactionProviders,
   ],
 })
 export class TransactionModule {}

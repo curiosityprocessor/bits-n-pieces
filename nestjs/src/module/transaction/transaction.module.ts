@@ -5,6 +5,7 @@ import TransactionProviderFactory from "@src/module/transaction/provider/externa
 import TossTransactionProvider from "@src/module/transaction/provider/external/toss.transaction.provider";
 import TossPaymentApi from "@src/module/transaction/api/toss.payment.api";
 import { RequestToTossTransformer } from "@src/module/transaction/transformer/request-to-toss.transformer";
+import { TossToEntityTransformer } from "@src/module/transaction/transformer/toss-to-entity.transformer";
 import { HttpModule } from "@nestjs/axios";
 import { transactionProviders } from "@src/module/transaction/provider/repository/transaction.provider";
 import { DatabaseModule } from "@src/module/global/database/database.module";
@@ -18,6 +19,7 @@ import { DatabaseModule } from "@src/module/global/database/database.module";
     TossTransactionProvider,
     TossPaymentApi,
     RequestToTossTransformer,
+    TossToEntityTransformer,
     ...transactionProviders,
   ],
 })

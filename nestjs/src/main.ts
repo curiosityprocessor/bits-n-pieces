@@ -2,6 +2,7 @@ import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { ValidationPipe } from "@nestjs/common";
 import * as dotenv from "dotenv";
+import { initSwagger } from "./swagger/swagger";
 
 async function bootstrap() {
   dotenv.config();
@@ -12,6 +13,7 @@ async function bootstrap() {
       // transformOptions: { enableImplicitConversion: true }, // activate for global emplicit transformation
     }),
   );
+  initSwagger(app);
   await app.listen(3000);
 }
 bootstrap();

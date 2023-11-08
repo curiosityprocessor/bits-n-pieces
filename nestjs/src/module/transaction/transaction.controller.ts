@@ -9,7 +9,9 @@ import {
 } from "@nestjs/common";
 import { TransactionService } from "@src/module/transaction/transaction.service";
 import { PostTransactionRequestDto } from "@src/module/transaction/dto/transaction";
+import { ApiExcludeEndpoint, ApiTags } from "@nestjs/swagger";
 
+@ApiTags("transactions")
 @Controller("transactions")
 export class TransactionController {
   constructor(private readonly transactionService: TransactionService) {}
@@ -26,6 +28,8 @@ export class TransactionController {
     return [];
   }
 
+  //testing swagger exclude api
+  @ApiExcludeEndpoint()
   @HttpCode(HttpStatus.CREATED)
   @Post()
   createTransaction(@Body() dto: PostTransactionRequestDto): Promise<void> {

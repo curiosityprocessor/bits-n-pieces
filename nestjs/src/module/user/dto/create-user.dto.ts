@@ -22,6 +22,7 @@ export class CreateUserDto {
 
   @ApiProperty({
     description: "이메일",
+    example: "user@domain.com",
   })
   @IsNotEmpty()
   @IsEmail()
@@ -42,22 +43,6 @@ export class CreateUserDto {
   pw: string;
 
   @ApiProperty({
-    description: "비밀번호 틀린 횟수",
-    type: Number,
-    default: 0,
-  })
-  @IsNotEmpty()
-  pwFailCount: number;
-
-  @ApiProperty({
-    description: "계정 잠김 여부",
-    type: Boolean,
-    default: false,
-  })
-  @IsNotEmpty()
-  isAccountLocked: boolean;
-
-  @ApiProperty({
     description: "사용자 상태",
     enum: Status,
     default: Status.NORMAL,
@@ -65,17 +50,4 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsEnum(Status)
   status: Status;
-
-  @ApiProperty({
-    description: "최종 로그인 일시",
-    type: Date,
-  })
-  @IsNotEmpty()
-  lastLoginAt: Date;
-
-  @ApiProperty({
-    description: "생성 일시",
-  })
-  @IsNotEmpty()
-  createdAt: Date;
 }

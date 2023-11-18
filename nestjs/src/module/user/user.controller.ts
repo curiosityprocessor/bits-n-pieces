@@ -11,6 +11,7 @@ import { UserService } from "./user.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { ApiTags } from "@nestjs/swagger";
+import logger from "../global/logger/winston.logger";
 
 @ApiTags("user")
 @Controller("user")
@@ -29,6 +30,7 @@ export class UserController {
 
   @Post("login")
   login(@Body() dto: UpdateUserDto) {
+    logger.warn(`testing custom winston logger ${JSON.stringify(dto)}`);
     return;
   }
 

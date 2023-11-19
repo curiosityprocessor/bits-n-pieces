@@ -30,7 +30,10 @@ export class UserController {
 
   @Post("login")
   login(@Body() dto: UpdateUserDto) {
+    logger.error(`testing custom winston logger ${JSON.stringify(dto)}`);
     logger.warn(`testing custom winston logger ${JSON.stringify(dto)}`);
+    logger.info(`testing custom winston logger ${JSON.stringify(dto)}`);
+    logger.debug(`testing custom winston logger ${JSON.stringify(dto)}`);
     return;
   }
 

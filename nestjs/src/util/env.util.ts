@@ -1,3 +1,6 @@
+import * as dotenv from "dotenv";
+dotenv.config();
+
 export const getEnv = (key: string) => {
   const matching = process.env[key];
   if (!matching) {
@@ -6,3 +9,5 @@ export const getEnv = (key: string) => {
 
   return matching;
 };
+
+export const isProduction = () => getEnv("NODE_ENV") === "production";

@@ -6,22 +6,31 @@ const winstonConfig = {
   transports: [
     new transports.File({
       filename: `.log/${new Date().toISOString().substring(0, 10)}_error.log`,
-      level: "info",
+      level: "warn",
+      format: format.combine(
+        format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+        format.printf(
+          (info) => `[${info.timestamp}] [${info.level}]: ${info.message}`,
+        ),
+      ),
     }),
   ],
-  format: format.combine(
-    format.colorize(),
-    format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
-    format.printf(
-      (info) => `[${info.timestamp}] [${info.level}]: ${info.message}`,
-    ),
-  ),
 };
 
 const logger = createLogger(winstonConfig);
 
 if (!isProduction()) {
-  logger.add(new transports.Console());
+  logger.add(
+    new transports.Console({
+      format: format.combine(
+        format.colorize(),
+        format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+        format.printf(
+          (info) => `[${info.timestamp}] [${info.level}]: ${info.message}`,
+        ),
+      ),
+    }),
+  );
 }
 
 export default logger;

@@ -1,11 +1,14 @@
 import * as path from "path";
 import { DataSource } from "typeorm";
-import { DATA_SOURCE, MYSQL } from "@src/module/global/database/constants";
-import { getEnv } from "@src/util/env.util";
+import {
+  MYSQL_DATA_SOURCE,
+  MYSQL,
+} from "@src/module/global/database/database.constants";
+import { getEnv, isNotProduction } from "@src/util/env.util";
 
 export const databaseProviders = [
   {
-    provide: DATA_SOURCE,
+    provide: MYSQL_DATA_SOURCE,
     useFactory: async () => {
       const dataSource = new DataSource({
         type: MYSQL,
@@ -15,7 +18,7 @@ export const databaseProviders = [
         password: getEnv("MYSQL_PW"),
         database: getEnv("MYSQL_DB"),
         entities: [path.resolve(__dirname, "..", "..", "**", "*.entity.js")],
-        synchronize: true,
+        synchronize: isNotProduction(),
       });
 
       return dataSource.initialize();

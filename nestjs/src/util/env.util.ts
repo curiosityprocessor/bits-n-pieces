@@ -11,3 +11,4 @@ export const getEnv = (key: string) => {
 };
 
 export const isProduction = () => getEnv("NODE_ENV") === "production";
+export const isNotProduction = () => !isProduction();

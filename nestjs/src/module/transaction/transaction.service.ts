@@ -3,7 +3,7 @@ import { PostTransactionRequestDto } from "@src/module/transaction/dto/transacti
 import TransactionProviderFactory from "@src/module/transaction/provider/external/transaction.provider.factory";
 import { Repository } from "typeorm";
 import { Transaction } from "@src/module/transaction/entity/transaction.entity";
-import { TRANSACTION_REPOSITORY } from "@src/module/global/database/constants";
+import { TRANSACTION_REPOSITORY } from "@src/module/global/database/database.constants";
 
 @Injectable()
 export class TransactionService {

@@ -1,7 +1,7 @@
 import {
-  DATA_SOURCE,
+  MYSQL_DATA_SOURCE,
   TRANSACTION_REPOSITORY,
-} from "@src/module/global/database/constants";
+} from "@src/module/global/database/database.constants";
 import { DataSource } from "typeorm";
 import { Transaction } from "@src/module/transaction/entity/transaction.entity";
 
@@ -10,6 +10,6 @@ export const transactionProviders = [
     provide: TRANSACTION_REPOSITORY,
     useFactory: (dataSource: DataSource) =>
       dataSource.getRepository(Transaction),
-    inject: [DATA_SOURCE],
+    inject: [MYSQL_DATA_SOURCE],
   },
 ];

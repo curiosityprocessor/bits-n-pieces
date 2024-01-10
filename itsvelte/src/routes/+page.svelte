@@ -42,6 +42,9 @@
 
 	h1 {
 		width: 100%;
+		color: goldenrod;
+		font-family: 'Garamond';
+		font-size: 2em;
 	}
 
 	.welcome {

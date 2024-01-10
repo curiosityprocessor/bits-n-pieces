@@ -4,6 +4,7 @@
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
 
 	let name = 'Demo Svelte';
+	let alt = 'Welcome';
 </script>
 
 <svelte:head>
@@ -16,7 +17,7 @@
 		<span class="welcome">
 			<picture>
 				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
+				<img src={welcome_fallback} {alt} />
 			</picture>
 		</span>
 

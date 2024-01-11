@@ -5,6 +5,7 @@
 
 	let name = 'Demo Svelte';
 	let alt = 'Welcome';
+	let warning = 'beware of <strong>XSS</strong> attacks!'
 </script>
 
 <svelte:head>
@@ -25,7 +26,10 @@
 	</h1>
 
 	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
+		{warning}
+	</h2>
+	<h2>
+		{@html warning}
 	</h2>
 
 	<Counter />

@@ -9,6 +9,10 @@
 		console.log(`count is even: ${isEven}`);
 	}
 
+	$: if (count % 3 === 0) {
+		console.log(`is divisible by three`);
+	}
+
 	const displayed_count = spring();
 	$: displayed_count.set(count);
 	$: offset = modulo($displayed_count, 1);

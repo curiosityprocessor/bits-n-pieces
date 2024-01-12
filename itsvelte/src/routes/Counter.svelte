@@ -2,6 +2,16 @@
 	import { spring } from 'svelte/motion';
 
 	let count = 0;
+	$: isEven = count % 2 === 0;
+
+	$: {
+		console.log(`count: ${count}`);
+		console.log(`count is even: ${isEven}`);
+	}
+
+	$: if (count % 3 === 0) {
+		console.log(`is divisible by three`);
+	}
 
 	const displayed_count = spring();
 	$: displayed_count.set(count);
@@ -44,12 +54,13 @@
 			<path d="M0,0.5 L1,0.5 M0.5,0 L0.5,1" />
 		</svg>
 	</button>
-	<button  on:click={multiplyBy2} aria-label="Multiply the counter by two">
+	<button on:click={multiplyBy2} aria-label="Multiply the counter by two">
 		<svg aria-hidden="true" viewBox="0 0 1 1">
 			<path d="M0,1 L1,0 M0,0 L1,1" />
 		</svg>
 	</button>
 </div>
+<p>is even? <strong>{isEven}</strong></p>
 
 <style>
 	.counter {

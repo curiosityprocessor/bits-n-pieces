@@ -6,6 +6,7 @@
 	const displayed_count = spring();
 	$: displayed_count.set(count);
 	$: offset = modulo($displayed_count, 1);
+	$: isEven = count % 2 === 0;
 
 	function modulo(n: number, m: number) {
 		// handle negative numbers
@@ -50,6 +51,7 @@
 		</svg>
 	</button>
 </div>
+<p>is even? <strong>{isEven}</strong></p>
 
 <style>
 	.counter {

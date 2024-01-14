@@ -14,8 +14,10 @@
 	}
 
 	let operationsHistory: string[] = [];
-
 	$: console.log(`list of operations: ${operationsHistory.join(',')}`);
+
+	let stats: Record<string, number> = {};
+	$: console.log(`stats:\n${JSON.stringify(stats, null, 2)}`);
 
 	const displayed_count = spring();
 	$: displayed_count.set(count);
@@ -29,16 +31,23 @@
 	function add() {
 		// operations.push('multiply'); // does NOT trigger reactive variables $: console.log...
 		operationsHistory = [...operationsHistory, 'add']; // DOES trigger reactive variables $: console.log...
+
+		// let addCount = stats['add']; // does NOT trigger reactive variables
+		// addCount = addCount+1; // does NOT trigger reactive variables
+		stats['add'] = (stats['add'] ?? 0) + 1; // DOES trigger reactive variables
+
 		count += 1;
 	}
 
 	function subtract() {
 		operationsHistory = [...operationsHistory, 'subtract'];
+		stats['subtract'] = (stats['subtract'] ?? 0) + 1;
 		count -= 1;
 	}
 
 	function multiplyBy2() {
 		operationsHistory = [...operationsHistory, 'multiply'];
+		stats['multiply'] = (stats['multiply'] ?? 0) + 1;
 		count *= 2;
 	}
 </script>

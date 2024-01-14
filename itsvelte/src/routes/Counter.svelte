@@ -13,6 +13,10 @@
 		console.log(`is divisible by three`);
 	}
 
+	let operationsHistory: string[] = [];
+
+	$: console.log(`list of operations: ${operationsHistory.join(',')}`);
+
 	const displayed_count = spring();
 	$: displayed_count.set(count);
 	$: offset = modulo($displayed_count, 1);
@@ -23,14 +27,18 @@
 	}
 
 	function add() {
+		// operations.push('multiply'); // does NOT trigger reactive variables $: console.log...
+		operationsHistory = [...operationsHistory, 'add']; // DOES trigger reactive variables $: console.log...
 		count += 1;
 	}
 
 	function subtract() {
+		operationsHistory = [...operationsHistory, 'subtract'];
 		count -= 1;
 	}
 
 	function multiplyBy2() {
+		operationsHistory = [...operationsHistory, 'multiply'];
 		count *= 2;
 	}
 </script>

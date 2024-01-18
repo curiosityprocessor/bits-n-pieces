@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { spring } from 'svelte/motion';
 
-	export let date: Date;
+	export let date: Date = new Date('2024-01-01');
 
 	let count = 0;
 	$: isEven = count % 2 === 0;

@@ -32,7 +32,7 @@
 		{@html warning}
 	</h2>
 
-	<Counter />
+	<Counter date={new Date()} />
 </section>
 
 <style>

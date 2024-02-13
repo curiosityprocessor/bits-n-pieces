@@ -85,6 +85,8 @@
 <p>is even? <strong>{isEven}</strong></p>
 {#if count >= 10}
 	<p>counter reached two digits!</p>
+{:else}
+	<p>counter is a single digit</p>
 {/if}
 
 <style>

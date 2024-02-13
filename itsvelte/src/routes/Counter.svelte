@@ -83,6 +83,9 @@
 	</button>
 </div>
 <p>is even? <strong>{isEven}</strong></p>
+{#if count >= 10}
+	<p>counter reached two digits!</p>
+{/if}
 
 <style>
 	.counter {

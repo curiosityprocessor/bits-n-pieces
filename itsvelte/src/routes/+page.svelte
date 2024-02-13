@@ -5,7 +5,11 @@
 
 	let name = 'Demo Svelte';
 	let alt = 'Welcome';
-	let warning = 'beware of <strong>XSS</strong> attacks!'
+	let warning = 'beware of <strong>XSS</strong> attacks!';
+	let counter = {
+		date: new Date(),
+		version: '0.0.1'
+	};
 </script>
 
 <svelte:head>
@@ -32,7 +36,7 @@
 		{@html warning}
 	</h2>
 
-	<Counter date={new Date()} />
+	<Counter {...counter} />
 </section>
 
 <style>

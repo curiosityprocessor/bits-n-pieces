@@ -2,6 +2,7 @@
 	import { spring } from 'svelte/motion';
 
 	export let date: Date = new Date('2024-01-01');
+	export let version: string = '0.0.0';
 
 	let count = 0;
 	$: isEven = count % 2 === 0;
@@ -55,6 +56,7 @@
 </script>
 
 <p>Today is {date.toLocaleDateString()}</p>
+<p>version: {version}</p>
 <div class="counter">
 	<button on:click={subtract} aria-label="Decrease the counter by one">
 		<svg aria-hidden="true" viewBox="0 0 1 1">

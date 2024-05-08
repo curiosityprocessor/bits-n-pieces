@@ -1,0 +1,10 @@
+{
+  "name": "tools-town",
+  "version": "0.0.1",
+  "description": "grab your tools in tools town!",
+  "main": "index.js",
+  "repository": "https://github.com/curiosityprocessor/bits-n-pieces",
+  "author": "curiosityprocessor",
+  "license": "MIT",
+  "private": false
+}

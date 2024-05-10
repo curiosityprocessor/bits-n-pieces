@@ -8,7 +8,8 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "test": "yarn jest"
+    "test": "yarn jest",
+    "test:verbose": "yarn jest --verbose"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",

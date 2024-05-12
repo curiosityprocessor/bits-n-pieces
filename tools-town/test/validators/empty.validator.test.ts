@@ -1,4 +1,4 @@
-import { isEmpty } from "../../src/validators/empty.validator";
+import { isEmpty, isNotEmpty } from "../../src/validators/empty.validator";
 
 describe(`Module::validators > empty.validator.ts`, () => {
   describe(`Function::isEmpty()`, () => {
@@ -53,4 +53,49 @@ describe(`Module::validators > empty.validator.ts`, () => {
       });
     });
   });
+
+  describe(`Function::isNotEmpty()`, () => {
+    test("`isNotEmpty()` is a negation of `isEmpty()`", () => {
+      // nullish
+      expect(isNotEmpty(null)).toBe(false);
+      expect(isNotEmpty(undefined)).toBe(false);
+      expect(isNotEmpty()).toBe(false);
+
+      // types
+      expect(isNotEmpty(true)).toBe(true);
+      expect(isNotEmpty(false)).toBe(true);
+      expect(isNotEmpty(0)).toBe(true);
+      expect(isNotEmpty(1)).toBe(true);
+      expect(isNotEmpty(-1)).toBe(true);
+      expect(isNotEmpty(new Date())).toBe(true);
+
+      // strings
+      expect(isNotEmpty("")).toBe(false);
+      expect(isNotEmpty(" ")).toBe(false);
+      expect(isNotEmpty(" string ")).toBe(true);
+
+      // objects
+      expect(isNotEmpty({})).toBe(false);
+      expect(isNotEmpty({ key1: "val1" })).toBe(true);
+      expect(isNotEmpty({})).toBe(false);
+      expect(
+        isNotEmpty({ key1: null, key2: undefined, key3: {}, key4: [] }),
+      ).toBe(false);
+      expect(isNotEmpty({ key1: "val1", key2: undefined })).toBe(true);
+      expect(isNotEmpty({ key1: "val1" })).toBe(true);
+
+      // arrays
+      expect(isNotEmpty([])).toBe(false);
+      expect(isNotEmpty([0])).toBe(true);
+      expect(isNotEmpty([null, undefined])).toBe(false);
+      expect(isNotEmpty([null, " "])).toBe(false);
+      expect(isNotEmpty([null, {}, []])).toBe(false);
+      expect(isNotEmpty([null, 1])).toBe(true);
+      expect(isNotEmpty([0])).toBe(true);
+    });
+  });
+
+  describe(`Function::isAnyEmpty()`, () => {});
+
+  describe(`Function::isNoneEmpty()`, () => {});
 });

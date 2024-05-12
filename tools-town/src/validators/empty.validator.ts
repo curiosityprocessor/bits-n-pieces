@@ -22,3 +22,5 @@ export const isEmpty = (data?: unknown): boolean => {
     return false;
   }
 };
+
+export const isNotEmpty = (data?: unknown): boolean => false;

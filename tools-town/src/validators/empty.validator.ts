@@ -23,4 +23,4 @@ export const isEmpty = (data?: unknown): boolean => {
   }
 };
 
-export const isNotEmpty = (data?: unknown): boolean => false;
+export const isNotEmpty = (data?: unknown): boolean => !isEmpty(data);

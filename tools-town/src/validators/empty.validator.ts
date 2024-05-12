@@ -27,3 +27,6 @@ export const isNotEmpty = (data?: unknown): boolean => !isEmpty(data);
 
 export const isAnyEmpty = (...data: unknown[]): boolean =>
   data.some((e) => isEmpty(e));
+
+export const isNoneEmpty = (...data: unknown[]): boolean =>
+  !isAnyEmpty(...data);

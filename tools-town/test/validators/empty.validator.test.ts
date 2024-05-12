@@ -1,6 +1,7 @@
 import {
   isAnyEmpty,
   isEmpty,
+  isNoneEmpty,
   isNotEmpty,
 } from "../../src/validators/empty.validator";
 
@@ -241,12 +242,91 @@ describe(`Module::validators > empty.validator.ts`, () => {
       );
     });
 
-    test("`isAnyEmpty()` with multiple parameter returns true when one or more of its parameters are `isEmpty()`", () => {
+    test("`isAnyEmpty()` with multiple parameters returns true when one or more of its parameters are `isEmpty()`", () => {
       expect(isAnyEmpty(...TEST_VARS.ARRAY.PARTIALLY_EMPTY)).toBe(true);
       expect(isAnyEmpty(...TEST_VARS.ARRAY.NESTED_EMPTY)).toBe(true);
       expect(isAnyEmpty(...TEST_VARS.ARRAY.NON_EMPTY)).toBe(false);
     });
   });
 
-  describe(`Function::isNoneEmpty()`, () => {});
+  describe(`Function::isNoneEmpty()`, () => {
+    test("invoking `isNoneEmpty()` with single parameter works the same as `isNotEmpty()`", () => {
+      // nullish
+      expect(isNoneEmpty(TEST_VARS.NULLISH.NULL)).toBe(
+        isNotEmpty(TEST_VARS.NULLISH.NULL),
+      );
+      expect(isNoneEmpty(TEST_VARS.NULLISH.UNDEFINED)).toBe(
+        isNotEmpty(TEST_VARS.NULLISH.UNDEFINED),
+      );
+
+      // types
+      expect(isNoneEmpty(TEST_VARS.BOOLEAN.TRUE)).toBe(
+        isNotEmpty(TEST_VARS.BOOLEAN.TRUE),
+      );
+      expect(isNoneEmpty(TEST_VARS.BOOLEAN.FALSE)).toBe(
+        isNotEmpty(TEST_VARS.BOOLEAN.FALSE),
+      );
+      expect(isNoneEmpty(TEST_VARS.NUMBER.ZERO)).toBe(
+        isNotEmpty(TEST_VARS.NUMBER.ZERO),
+      );
+      expect(isNoneEmpty(TEST_VARS.NUMBER.POSITIVE)).toBe(
+        isNotEmpty(TEST_VARS.NUMBER.POSITIVE),
+      );
+      expect(isNoneEmpty(TEST_VARS.NUMBER.NEGATIVE)).toBe(
+        isNotEmpty(TEST_VARS.NUMBER.NEGATIVE),
+      );
+      expect(isNoneEmpty(TEST_VARS.DATE)).toBe(isNotEmpty(TEST_VARS.DATE));
+
+      // string
+      expect(isNoneEmpty(TEST_VARS.STRING.EMPTY)).toBe(
+        isNotEmpty(TEST_VARS.STRING.EMPTY),
+      );
+      expect(isNoneEmpty(TEST_VARS.STRING.BLANK)).toBe(
+        isNotEmpty(TEST_VARS.STRING.BLANK),
+      );
+      expect(isNoneEmpty(TEST_VARS.STRING.TRAILING)).toBe(
+        isNotEmpty(TEST_VARS.STRING.TRAILING),
+      );
+      expect(isNoneEmpty(TEST_VARS.STRING.NON_EMPTY)).toBe(
+        isNotEmpty(TEST_VARS.STRING.NON_EMPTY),
+      );
+
+      // object
+      expect(isNoneEmpty(TEST_VARS.OBJECT.EMPTY)).toBe(
+        isNotEmpty(TEST_VARS.OBJECT.EMPTY),
+      );
+      expect(isNoneEmpty(TEST_VARS.OBJECT.VALUELESS)).toBe(
+        isNotEmpty(TEST_VARS.OBJECT.VALUELESS),
+      );
+      expect(isNoneEmpty(TEST_VARS.OBJECT.NESTED_EMPTY)).toBe(
+        isNotEmpty(TEST_VARS.OBJECT.NESTED_EMPTY),
+      );
+      expect(isNoneEmpty(TEST_VARS.OBJECT.PARTIALLY_EMPTY)).toBe(
+        isNotEmpty(TEST_VARS.OBJECT.PARTIALLY_EMPTY),
+      );
+      expect(isNoneEmpty(TEST_VARS.OBJECT.NON_EMPTY)).toBe(
+        isNotEmpty(TEST_VARS.OBJECT.NON_EMPTY),
+      );
+
+      // array
+      expect(isNoneEmpty(TEST_VARS.ARRAY.EMPTY)).toBe(
+        isNotEmpty(TEST_VARS.ARRAY.EMPTY),
+      );
+      expect(isNoneEmpty(TEST_VARS.ARRAY.NESTED_EMPTY)).toBe(
+        isNotEmpty(TEST_VARS.ARRAY.NESTED_EMPTY),
+      );
+      expect(isNoneEmpty(TEST_VARS.ARRAY.PARTIALLY_EMPTY)).toBe(
+        isNotEmpty(TEST_VARS.ARRAY.PARTIALLY_EMPTY),
+      );
+      expect(isNoneEmpty(TEST_VARS.ARRAY.NON_EMPTY)).toBe(
+        isNotEmpty(TEST_VARS.ARRAY.NON_EMPTY),
+      );
+    });
+
+    test("`isNoneEmpty()` with multiple parameters returns true when every one of its parameters are `isNotEmpty()`", () => {
+      expect(isNoneEmpty(...TEST_VARS.ARRAY.PARTIALLY_EMPTY)).toBe(false);
+      expect(isNoneEmpty(...TEST_VARS.ARRAY.NESTED_EMPTY)).toBe(false);
+      expect(isNoneEmpty(...TEST_VARS.ARRAY.NON_EMPTY)).toBe(true);
+    });
+  });
 });

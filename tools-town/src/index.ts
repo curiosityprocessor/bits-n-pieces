@@ -1,3 +1,3 @@
-import * as validators from '@src/validators'
+import * as validators from "./validators";
 
-export { validators }
+export { validators };

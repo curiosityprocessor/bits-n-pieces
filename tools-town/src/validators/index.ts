@@ -1,3 +1,3 @@
-import * as emptyValidators from '@src/validators/empty.validator';
+import * as emptyValidators from "./empty.validator";
 
 export { emptyValidators };

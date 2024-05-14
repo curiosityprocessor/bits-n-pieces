@@ -10,7 +10,8 @@
   "scripts": {
     "build": "tsc",
     "test": "yarn jest",
-    "test-v": "clear && yarn jest --verbose"
+    "test-v": "clear && yarn jest --verbose",
+    "test-c": "clear && yarn jest --verbose --onlyChanged"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",

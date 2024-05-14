@@ -4,42 +4,7 @@ import {
   isNoneEmpty,
   isNotEmpty,
 } from "../../src/validators/empty.validator";
-
-const TEST_VARS = {
-  NULLISH: {
-    NULL: null,
-    UNDEFINED: undefined,
-  },
-  BOOLEAN: {
-    TRUE: true,
-    FALSE: false,
-  },
-  DATE: new Date(),
-  NUMBER: {
-    ZERO: 0,
-    POSITIVE: 1,
-    NEGATIVE: -1,
-  },
-  STRING: {
-    EMPTY: "",
-    BLANK: " ",
-    TRAILING: " string ",
-    NON_EMPTY: "string",
-  },
-  OBJECT: {
-    EMPTY: {},
-    NESTED_EMPTY: { key1: null, key2: undefined, key3: {}, key4: [] },
-    VALUELESS: { key1: undefined },
-    PARTIALLY_EMPTY: { key1: "string", key2: undefined },
-    NON_EMPTY: { key1: false, key2: 0, key3: "string", key4: [1, 2, 3] },
-  },
-  ARRAY: {
-    EMPTY: [],
-    NESTED_EMPTY: [null, undefined, {}, []],
-    PARTIALLY_EMPTY: [false, null, { key1: "string" }],
-    NON_EMPTY: [false, 0, "string", { key1: "string" }],
-  },
-};
+import { TEST_VARS } from "../test.constants";
 
 describe(`Module::validators > empty.validator.ts`, () => {
   describe(`Function::isEmpty()`, () => {
@@ -62,7 +27,7 @@ describe(`Module::validators > empty.validator.ts`, () => {
       expect(isEmpty(TEST_VARS.STRING.EMPTY)).toBe(true);
       expect(isEmpty(TEST_VARS.STRING.BLANK)).toBe(true);
       expect(isEmpty(TEST_VARS.STRING.TRAILING)).toBe(false);
-      expect(isEmpty(TEST_VARS.STRING.NON_EMPTY)).toBe(false);
+      expect(isEmpty(TEST_VARS.STRING.PLAIN)).toBe(false);
     });
 
     describe("an object is empty when;", () => {
@@ -131,8 +96,8 @@ describe(`Module::validators > empty.validator.ts`, () => {
       expect(isNotEmpty(TEST_VARS.STRING.TRAILING)).toBe(
         !isEmpty(TEST_VARS.STRING.TRAILING),
       );
-      expect(isNotEmpty(TEST_VARS.STRING.NON_EMPTY)).toBe(
-        !isEmpty(TEST_VARS.STRING.NON_EMPTY),
+      expect(isNotEmpty(TEST_VARS.STRING.PLAIN)).toBe(
+        !isEmpty(TEST_VARS.STRING.PLAIN),
       );
 
       // objects
@@ -206,8 +171,8 @@ describe(`Module::validators > empty.validator.ts`, () => {
       expect(isAnyEmpty(TEST_VARS.STRING.TRAILING)).toBe(
         isEmpty(TEST_VARS.STRING.TRAILING),
       );
-      expect(isAnyEmpty(TEST_VARS.STRING.NON_EMPTY)).toBe(
-        isEmpty(TEST_VARS.STRING.NON_EMPTY),
+      expect(isAnyEmpty(TEST_VARS.STRING.PLAIN)).toBe(
+        isEmpty(TEST_VARS.STRING.PLAIN),
       );
 
       // object
@@ -287,8 +252,8 @@ describe(`Module::validators > empty.validator.ts`, () => {
       expect(isNoneEmpty(TEST_VARS.STRING.TRAILING)).toBe(
         isNotEmpty(TEST_VARS.STRING.TRAILING),
       );
-      expect(isNoneEmpty(TEST_VARS.STRING.NON_EMPTY)).toBe(
-        isNotEmpty(TEST_VARS.STRING.NON_EMPTY),
+      expect(isNoneEmpty(TEST_VARS.STRING.PLAIN)).toBe(
+        isNotEmpty(TEST_VARS.STRING.PLAIN),
       );
 
       // object

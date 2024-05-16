@@ -1,3 +1,5 @@
 import * as validators from "./validators";
+import * as parsers from "./parsers";
+import * as classifiers from "./classifiers";
 
-export { validators };
+export { validators, parsers, classifiers };

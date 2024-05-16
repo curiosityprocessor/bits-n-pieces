@@ -1,3 +1,4 @@
+import { getDetailedType } from "../classifiers/type.classifier";
 import { isEmpty } from "../validators/empty.validator";
 
 export const DEFAULT_NUMBER_VALUE = 0;
@@ -20,7 +21,9 @@ export const toNum = (data?: unknown): number => {
     }
   } catch (error) {
     throw new Error(
-      `Failed to parse into number from data ${data?.toString()} of type ${typeof data}`,
+      `Failed to parse into number from data '${
+        !!data ? JSON.stringify(data) : data
+      }' of type ${getDetailedType(data)}`,
     );
   }
 };

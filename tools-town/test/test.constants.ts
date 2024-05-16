@@ -26,6 +26,8 @@ export const TEST_VARS = {
     PLAIN: "string",
     JSON_ARRAY: "[1,2,3]",
     JSON_OBJECT: `{"key1":"value1"}`,
+    NUMERIC: "123",
+    NUMERIC_LPAD: "00123",
   },
   DATE: {
     VALID: new Date(),

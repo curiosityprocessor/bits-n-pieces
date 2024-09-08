@@ -24,41 +24,48 @@
 </script>
 
 <!-- App Shell -->
-<AppShell>
+<AppShell slotSidebarLeft="bg-surface-500/5 w-56 p-4">
   <svelte:fragment slot="header">
     <!-- App Bar -->
     <AppBar>
       <svelte:fragment slot="lead">
-        <strong class="text-xl uppercase">Skeleton</strong>
+        <strong class="text-xl uppercase">Playground</strong>
       </svelte:fragment>
       <svelte:fragment slot="trail">
         <a
           class="btn btn-sm variant-ghost-surface"
-          href="https://discord.gg/EXqV7W8MtY"
+          href="link-to-some-service-1.com"
           target="_blank"
           rel="noreferrer"
         >
-          Discord
+          Link1
         </a>
         <a
           class="btn btn-sm variant-ghost-surface"
-          href="https://twitter.com/SkeletonUI"
+          href="link-to-some-service-2.com"
           target="_blank"
           rel="noreferrer"
         >
-          Twitter
-        </a>
-        <a
-          class="btn btn-sm variant-ghost-surface"
-          href="https://github.com/skeletonlabs/skeleton"
-          target="_blank"
-          rel="noreferrer"
-        >
-          GitHub
+          Link2
         </a>
       </svelte:fragment>
     </AppBar>
   </svelte:fragment>
+
+  <!-- Sidebar -->
+  <svelte:fragment slot="sidebarLeft">
+    <!-- Insert the list: -->
+    <nav class="list-nav">
+      <ul>
+        <li><a href="/">Dashboard</a></li>
+        <li><a href="/chat">Chat</a></li>
+        <li><a href="/task">Task</a></li>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/dev">Dev</a></li>
+      </ul>
+    </nav>
+  </svelte:fragment>
+
   <!-- Page Route Content -->
   <slot />
 </AppShell>

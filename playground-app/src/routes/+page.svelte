@@ -1,2 +1,6 @@
+<script>
+  export let data;
+</script>
+
 <h1>Home</h1>
-<p>default page</p>
+<p>Welcome{data.visited ? " back" : ""}!</p>

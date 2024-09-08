@@ -7,6 +7,7 @@
   <a href="/">home</a>
   <a href="/task">task</a>
   <a href="/chat">chat</a>
+  <a href="/prompt">prompt</a>
   <a href="/dev">dev</a>
 </nav>
 <slot></slot>

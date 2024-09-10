@@ -59,6 +59,7 @@
       <ul>
         <li><a href="/">Dashboard</a></li>
         <li><a href="/chat">Chat</a></li>
+        <li><a href="/task">Task</a></li>
         <li><a href="/prompt">Prompts</a></li>
         <li><a href="/faq">FAQ</a></li>
         <li><a href="/dev">Dev</a></li>

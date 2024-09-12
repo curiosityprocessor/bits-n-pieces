@@ -21,6 +21,8 @@
   import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
   import { storePopup } from '@skeletonlabs/skeleton';
   storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+
+  import { LightSwitch } from '@skeletonlabs/skeleton';
 </script>
 
 <!-- App Shell -->
@@ -32,21 +34,9 @@
         <strong class="text-xl uppercase">Playground</strong>
       </svelte:fragment>
       <svelte:fragment slot="trail">
-        <a
-          class="btn btn-sm variant-ghost-surface"
-          href="link-to-some-service-1.com"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Link1
-        </a>
-        <a
-          class="btn btn-sm variant-ghost-surface"
-          href="link-to-some-service-2.com"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Link2
+        <LightSwitch title="다크모드" />
+        <a class="btn btn-sm variant-ghost-surface" href="/" target="_self" rel="noreferrer">
+          Home
         </a>
       </svelte:fragment>
     </AppBar>

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { enhance } from '$app/forms';
   import {
     faCaretRight,
     faExclamationTriangle,
@@ -10,6 +11,55 @@
 
   let systemPromptUiOpen = false;
   let parameterUiOpen = false;
+
+  let responseText = '';
+  let isStreaming = false;
+
+  const handleStreamResponse = async (reader: ReadableStreamDefaultReader) => {
+    const decoder = new TextDecoder();
+    const startAt = performance.now();
+    const timeout = 1000 * 60 * 2; // 2 minutes
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) {
+        break;
+      }
+      if (performance.now() - startAt > timeout) {
+        break;
+      }
+
+      responseText += decoder.decode(value, { stream: true });
+    }
+  };
+
+  const handleSumbit = async (event: SubmitEvent) => {
+    event.preventDefault();
+    console.log('event:', event);
+    isStreaming = true;
+    responseText = '';
+
+    const form = event.target as HTMLFormElement;
+    const formData = new FormData(form);
+
+    console.log(`debugging formData`);
+    for (const [key, value] of formData.entries()) {
+      console.log(key, value); // Make sure the input names and values are correct
+    }
+
+    const response = await fetch('/task', {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (response.body) {
+      const reader = response.body.getReader();
+      await handleStreamResponse(reader);
+    } else {
+      responseText = 'No response from the server';
+    }
+    isStreaming = false;
+  };
 </script>
 
 <div class="flex flex-col h-full">
@@ -21,7 +71,7 @@
   <!-- Data -->
   <div class="flex flex-grow">
     <div class="flex flex-col w-1/2 min-w-[200px] resize-x overflow-auto border-r p-4">
-      <form method="post" action="?/create">
+      <form method="post" on:submit={handleSumbit}>
         <h3 class="h3 mb-4">Input</h3>
 
         <div class="mb-4">
@@ -122,9 +172,13 @@
           {/if}
         </div>
         <div>
-          <button type="submit" class="btn-md variant-filled-surface p-2 rounded">
+          <button
+            type="submit"
+            class="btn-md variant-filled-surface p-2 rounded"
+            disabled={isStreaming}
+          >
             <FontAwesomeIcon icon={faCaretRight} />
-            <span>Try it!</span></button
+            <span>{isStreaming ? 'Running...' : 'Try it!'}</span></button
           >
         </div>
       </form>
@@ -134,7 +188,13 @@
       <h3 class="h3 mb-4">Output</h3>
       <label class="label">
         <span>Assistant message</span>
-        <textarea class="textarea" readonly rows="20" placeholder="AI 응답값" />
+        <textarea
+          class="textarea"
+          readonly
+          rows="20"
+          placeholder="AI 응답값"
+          bind:value={responseText}
+        />
       </label>
     </div>
   </div>

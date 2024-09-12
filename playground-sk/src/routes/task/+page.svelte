@@ -1,5 +1,12 @@
 <script lang="ts">
+  import {
+    faCaretRight,
+    faExclamationTriangle,
+    faTimesCircle,
+  } from '@fortawesome/free-solid-svg-icons';
+  import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
   import { SlideToggle } from '@skeletonlabs/skeleton';
+  export let form;
 
   let systemPromptUiOpen = false;
   let parameterUiOpen = false;
@@ -49,12 +56,26 @@
           <div class="w-full mt-2">
             <label class="label">
               <span>User message</span>
+              {#if form?.error}
+                <aside class="alert variant-filled-error">
+                  <FontAwesomeIcon icon={faExclamationTriangle} />
+                  <div class="alert-message">
+                    <p>{form.description}</p>
+                  </div>
+                  <div class="alert-actions">
+                    <button type="button" on:click={() => (form.error = null)}>
+                      <FontAwesomeIcon icon={faTimesCircle} />
+                    </button>
+                  </div>
+                </aside>
+              {/if}
               <textarea
                 name="userMessage"
                 class="textarea"
                 rows="15"
                 placeholder=""
                 autocomplete="off"
+                required
               />
             </label>
           </div>
@@ -101,8 +122,9 @@
           {/if}
         </div>
         <div>
-          <button type="submit" class="btn-md variant-filled-surface p-2 rounded"
-            ><span>Try it!</span></button
+          <button type="submit" class="btn-md variant-filled-surface p-2 rounded">
+            <FontAwesomeIcon icon={faCaretRight} />
+            <span>Try it!</span></button
           >
         </div>
       </form>

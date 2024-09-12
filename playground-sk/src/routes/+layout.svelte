@@ -23,6 +23,10 @@
   storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
   import { LightSwitch } from '@skeletonlabs/skeleton';
+
+  import '@fortawesome/fontawesome-svg-core/styles.css';
+  import { config } from '@fortawesome/fontawesome-svg-core';
+  config.autoAddCss = false;
 </script>
 
 <!-- App Shell -->

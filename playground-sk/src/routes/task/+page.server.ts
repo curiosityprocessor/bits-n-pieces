@@ -10,7 +10,7 @@ export const actions = {
       dummyValidateCreateAction(data);
     } catch (error: any) {
       return fail(422, {
-        description: 'Unprocessable Entity',
+        description: error?.cause ?? 'Validation error',
         error: error.message,
       });
     }
@@ -19,6 +19,6 @@ export const actions = {
 
 const dummyValidateCreateAction = (data: FormData) => {
   if (!data.has('userMessage') || !data.get('userMessage')?.toString()?.trim()) {
-    throw new Error('User message is required');
+    throw new Error('userMessage', { cause: 'User message is required' });
   }
 };

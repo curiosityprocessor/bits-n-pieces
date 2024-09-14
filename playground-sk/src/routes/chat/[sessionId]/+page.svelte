@@ -58,6 +58,7 @@
   <section bind:this={chatElement} class="w-full h-[80vh] p-4 overflow-y-auto space-y-4">
     {#each data.chats as bubble}
       {#if bubble.role === 'user'}
+        <!-- User Message Bubble -->
         <div class="grid grid-cols-[1fr_auto] gap-2">
           <div class="card p-4 rounded-tr-none space-y-2 variant-soft-primary">
             <header class="flex justify-between items-center">

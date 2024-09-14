@@ -18,7 +18,7 @@ const dummyApiStream = () => {
   const encoder = new TextEncoder();
   let index = 0;
   const message =
-    'Hi, I am your assistant.\nI am here to help you with your tasks.\nHow can I help you today? 😃';
+    '# Welcome! &#128515;	\nHi I am your **LLM** assistant.  I am here to help you with your _tasks_.\n\nHow can I help you today?\n\nI can:\n- chat\n- find patterns\n- or code!\n\n```html\n<p>hello world!</p>\n```\n';
   return new ReadableStream({
     async start(controller) {
       const interval = setInterval(() => {
@@ -29,7 +29,7 @@ const dummyApiStream = () => {
           clearInterval(interval);
           controller.close();
         }
-      }, 100);
+      }, 60);
     },
   });
 };

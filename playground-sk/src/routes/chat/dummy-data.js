@@ -28,7 +28,7 @@ export const dummyData = [
   {
     sessionId: 2,
     title: 'Chat from past',
-    chatId: 0,
+    chatId: 3,
     userId: 7,
     role: 'user',
     timestamp: '2024-09-02T08:00:00Z',
@@ -37,9 +37,25 @@ export const dummyData = [
   {
     sessionId: 2,
     title: 'Chat from past',
-    chatId: 1,
+    chatId: 4,
     role: 'assistant',
     timestamp: '2024-09-02T08:00:20Z',
     content: "I'm sorry, I don't remember the code you are referring to.",
+  },
+  {
+    sessionId: 3,
+    title: 'Lorem ipsum',
+    chatId: 5,
+    role: 'user',
+    timestamp: '2024-09-04T11:40:00Z',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tellus.',
+  },
+  {
+    sessionId: 3,
+    title: 'Lorem ipsum',
+    chatId: 6,
+    role: 'assistant',
+    timestamp: '2024-09-04T11:40:13Z',
+    content: `It's a text filler.`,
   },
 ];

@@ -8,6 +8,7 @@ export function load() {
     title: _.first(chats)?.title ?? '-untitled chat-',
     firstMessage: _.first(chats)?.content ?? '(empty message)',
     createdAt: _.first(chats)?.timestamp ?? 'N/A',
+    messageCount: chats.length,
   }));
   return { chats: summarizedChats };
 }

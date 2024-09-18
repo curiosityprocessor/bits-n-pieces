@@ -2,10 +2,11 @@
   import {
     faCaretRight,
     faExclamationTriangle,
+    faQuestionCircle,
     faTimesCircle,
   } from '@fortawesome/free-solid-svg-icons';
   import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
-  import { SlideToggle } from '@skeletonlabs/skeleton';
+  import { popup, SlideToggle, type PopupSettings } from '@skeletonlabs/skeleton';
   export let form;
   import markdownit from 'markdown-it';
   import { full as emoji } from 'markdown-it-emoji';
@@ -82,6 +83,36 @@
     }
     isStreaming = false;
   };
+
+  const systemPromptPopup: PopupSettings = {
+    event: 'hover',
+    target: 'systemPromptPopup',
+    placement: 'bottom',
+  };
+
+  const userPromptPopup: PopupSettings = {
+    event: 'hover',
+    target: 'userPromptPopup',
+    placement: 'bottom',
+  };
+
+  const temperaturePopup: PopupSettings = {
+    event: 'hover',
+    target: 'temperaturePopup',
+    placement: 'bottom',
+  };
+
+  const maxInputTokenPopup: PopupSettings = {
+    event: 'hover',
+    target: 'maxInputTokenPopup',
+    placement: 'bottom',
+  };
+
+  const maxOutputTokenPopup: PopupSettings = {
+    event: 'hover',
+    target: 'maxOutputTokenPopup',
+    placement: 'bottom',
+  };
 </script>
 
 <div class="flex flex-col h-full">
@@ -106,16 +137,45 @@
           </button>
           {#if systemPromptUiOpen}
             <div class="w-full mt-2 p-4">
-              <label for="systemMessage" class="label"
-                ><span>System message (optional)</span>
+              <label for="systemMessage" class="label">
+                <div class="flex items-center">
+                  <span>System message (optional)</span>
+                  <button
+                    class="btn [&>*]:pointer-events-none p-2"
+                    type="button"
+                    use:popup={systemPromptPopup}
+                  >
+                    <FontAwesomeIcon icon={faQuestionCircle} />
+                  </button>
+                </div>
                 <textarea
                   name="systemMessage"
                   class="textarea"
                   rows="4"
                   placeholder="(Optional)"
                   autocomplete="off"
-                /></label
-              >
+                />
+                <div data-popup="systemPromptPopup">
+                  <div class="card p-4 variant-filled-secondary">
+                    <h3 class="h3">시스템 프롬프트</h3>
+                    <p>default <code class="code">null</code></p>
+                    <p>시스템 프롬프트는 이번 세션동안 유지되는 특성을 부여하는데 사용됩니다.</p>
+                    <p>
+                      예를 들어 말투/성격, 역할, AI의 이름, 대화 가능한 범위 등을 지정하거나 제한할
+                      수 있으며,
+                    </p>
+                    <p>
+                      특히 구체적이고 현실에 존재하는 역할이나 직무를 지정할 시 기대에 부합하는
+                      결과가 나올 확률이 올라갑니다.
+                    </p>
+                    <ul>
+                      <li>ex) "Act as a stock market analyst."</li>
+                      <li>ex) "Your role is a public relations officer."</li>
+                      <li>ex) "You are a career counselor.</li>
+                    </ul>
+                  </div>
+                </div>
+              </label>
             </div>
           {/if}
         </div>
@@ -126,7 +186,16 @@
           >
           <div class="w-full mt-2 p-4">
             <label class="label">
-              <span>User message</span>
+              <div class="flex items-center">
+                <span>User message</span>
+                <button
+                  class="btn [&>*]:pointer-events-none p-2"
+                  type="button"
+                  use:popup={userPromptPopup}
+                >
+                  <FontAwesomeIcon icon={faQuestionCircle} />
+                </button>
+              </div>
               {#if form?.error}
                 <aside class="alert variant-filled-error">
                   <FontAwesomeIcon icon={faExclamationTriangle} />
@@ -147,6 +216,35 @@
                 placeholder=""
                 autocomplete="off"
               />
+              <div data-popup="userPromptPopup">
+                <div class="card p-4 variant-filled-secondary">
+                  <h3 class="h3">시용자 프롬프트</h3>
+                  <p>사용자 프롬프트는 AI가 생성할 텍스트의 기준점이 되는 데이터입니다.</p>
+                  <p>사용자 프롬프트가 질문이라면 AI는 답변을 하고,</p>
+                  <p>사용자 프롬프트가 지시사항이라면 AI는 수행 결과를 출력합니다.</p>
+                  <p>
+                    지시사항이 길어질수록/복잡해질수록, 사람이 쓴 글처럼 구조를 갖추면 결과가 더
+                    좋아집니다.
+                  </p>
+                  <p>ex)</p>
+                  <pre class="pre mt-2">
+    Instruction
+    -----------
+    (첫번째 지시사항)
+    (두번째 지시사항)
+    (n번째 지시사항)
+
+    Input Data
+    ----------
+    (사용자 입력 데이터)
+    (참조를 위한 부가 데이터)
+
+    Output Data
+    ----------
+    (출력할 데이터 포맷, 규칙 등 제시)
+  </pre>
+                </div>
+              </div>
             </label>
           </div>
         </div>
@@ -163,11 +261,39 @@
           {#if parameterUiOpen}
             <div class="w-full mt-2 p-4">
               <label class="label">
-                <span>Temperature</span>
+                <div class="flex items-center">
+                  <span>Temperature</span>
+                  <button
+                    class="btn [&>*]:pointer-events-none p-2"
+                    type="button"
+                    use:popup={temperaturePopup}
+                  >
+                    <FontAwesomeIcon icon={faQuestionCircle} />
+                  </button>
+                </div>
                 <input name="temperature" type="range" value="75" max="100" />
+                <div data-popup="temperaturePopup">
+                  <div class="card p-4 variant-filled-secondary">
+                    <h3 class="h3">Temperature</h3>
+                    <p>LLM이 생성할 텍스트의 랜덤성을 설정하는 값입니다.</p>
+                    <p>
+                      0에 가까울 수록 객관적/분석적인 텍스트가 생성되며, 1에 가까울수록 창의적인
+                      텍스트가 생성됩니다.
+                    </p>
+                  </div>
+                </div>
               </label>
               <label class="label mt-4">
-                <span>Max Input Tokens</span>
+                <div class="flex items-center">
+                  <span>Max Input Tokens</span>
+                  <button
+                    class="btn [&>*]:pointer-events-none p-2"
+                    type="button"
+                    use:popup={maxInputTokenPopup}
+                  >
+                    <FontAwesomeIcon icon={faQuestionCircle} />
+                  </button>
+                </div>
                 <input
                   name="maxInputTokens"
                   class="input"
@@ -176,9 +302,29 @@
                   placeholder="최대 15,000 개"
                   autocomplete="off"
                 />
+                <div data-popup="maxInputTokenPopup">
+                  <div class="card p-4 variant-filled-secondary">
+                    <h3 class="h3">입력 토큰 최대 개수</h3>
+                    <p>시스템 프롬프트 + 사용자 프롬프트의 토큰 합산 값입니다.</p>
+                    <p>
+                      실제 토큰 사용량이 설정한 최대 값을 초과할 경우, 모델에 따라 처리 방법이
+                      달라집니다
+                    </p>
+                    <p>ex) 앞에서부터 자른 뒤 요청</p>
+                  </div>
+                </div>
               </label>
               <label class="label mt-4">
-                <span>Max Output Tokens</span>
+                <div class="flex items-center">
+                  <span>Max Output Tokens</span>
+                  <button
+                    class="btn [&>*]:pointer-events-none p-2"
+                    type="button"
+                    use:popup={maxOutputTokenPopup}
+                  >
+                    <FontAwesomeIcon icon={faQuestionCircle} />
+                  </button>
+                </div>
                 <input
                   name="maxOutputTokens"
                   class="input"
@@ -187,6 +333,16 @@
                   placeholder="최대 2,048 개"
                   autocomplete="off"
                 />
+                <div data-popup="maxOutputTokenPopup">
+                  <div class="card p-4 variant-filled-secondary">
+                    <h3 class="h3">출력 토큰 최대 개수</h3>
+                    <p>LLM이 생성할 응답의 최대 토큰 수 입니다.</p>
+                    <p>
+                      생성 예정인 토큰이 설정한 최대 값을 초과할 경우 응답이 잘리고, 상태값이
+                      "stop"이 아닌 "length"가 됩니다.
+                    </p>
+                  </div>
+                </div>
               </label>
             </div>
           {/if}

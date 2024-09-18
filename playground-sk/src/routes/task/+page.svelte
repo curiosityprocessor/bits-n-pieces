@@ -6,7 +6,7 @@
     faTimesCircle,
   } from '@fortawesome/free-solid-svg-icons';
   import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
-  import { popup, SlideToggle, type PopupSettings } from '@skeletonlabs/skeleton';
+  import { popup, RangeSlider, SlideToggle, type PopupSettings } from '@skeletonlabs/skeleton';
   export let form;
   import markdownit from 'markdown-it';
   import { full as emoji } from 'markdown-it-emoji';
@@ -113,6 +113,9 @@
     target: 'maxOutputTokenPopup',
     placement: 'bottom',
   };
+
+  let temperatureValue = 0.2;
+  let maxTemperatureValue = 1.0;
 </script>
 
 <div class="flex flex-col h-full">
@@ -171,7 +174,7 @@
                     <ul>
                       <li>ex) "Act as a stock market analyst."</li>
                       <li>ex) "Your role is a public relations officer."</li>
-                      <li>ex) "You are a career counselor.</li>
+                      <li>ex) "You are a career counselor.""</li>
                     </ul>
                   </div>
                 </div>
@@ -261,27 +264,37 @@
           {#if parameterUiOpen}
             <div class="w-full mt-2 p-4">
               <label class="label">
-                <div class="flex items-center">
-                  <span>Temperature</span>
-                  <button
-                    class="btn [&>*]:pointer-events-none p-2"
-                    type="button"
-                    use:popup={temperaturePopup}
-                  >
-                    <FontAwesomeIcon icon={faQuestionCircle} />
-                  </button>
-                </div>
-                <input name="temperature" type="range" value="75" max="100" />
-                <div data-popup="temperaturePopup">
-                  <div class="card p-4 variant-filled-secondary">
-                    <h3 class="h3">Temperature</h3>
-                    <p>LLM이 생성할 텍스트의 랜덤성을 설정하는 값입니다.</p>
-                    <p>
-                      0에 가까울 수록 객관적/분석적인 텍스트가 생성되며, 1에 가까울수록 창의적인
-                      텍스트가 생성됩니다.
-                    </p>
+                <RangeSlider
+                  name="range-slider"
+                  bind:value={temperatureValue}
+                  max={maxTemperatureValue}
+                  step={0.1}
+                  ticked
+                >
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center">
+                      <span>Temperature</span>
+                      <button
+                        class="btn [&>*]:pointer-events-none p-2"
+                        type="button"
+                        use:popup={temperaturePopup}
+                      >
+                        <FontAwesomeIcon icon={faQuestionCircle} />
+                      </button>
+                    </div>
+                    <div class="text-xs">{temperatureValue} / {maxTemperatureValue}</div>
+                    <div data-popup="temperaturePopup">
+                      <div class="card p-4 variant-filled-secondary">
+                        <h3 class="h3">Temperature</h3>
+                        <p>LLM이 생성할 텍스트의 랜덤성을 설정하는 값입니다.</p>
+                        <p>
+                          0에 가까울 수록 객관적/분석적인 텍스트가 생성되며, 1에 가까울수록 창의적인
+                          텍스트가 생성됩니다.
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </RangeSlider>
               </label>
               <label class="label mt-4">
                 <div class="flex items-center">

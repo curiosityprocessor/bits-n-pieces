@@ -1,0 +1,10 @@
+{
+    "manifest_version": 3,
+    "name": "Cookie Monster",
+    "description": "Cookie Manager",
+    "version": "0.0.1",
+    "action": {
+        "default_popup": "src/popup.html",
+        "default_icon": "images/cookie.jpeg"
+    }
+}

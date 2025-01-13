@@ -3,11 +3,11 @@
   "name": "Cookie Monster",
   "description": "Cookie Manager",
   "version": "0.0.1",
+  "version_name": "alpha",
   "action": {
-    "default_popup": "src/popup.html",
     "default_icon": "images/cookie.jpeg"
   },
-  "permissions": ["activeTab"],
+  "permissions": ["activeTab", "scripting"],
   "background": {
     "service_worker": "dist/background.js"
   },

@@ -1,0 +1,16 @@
+{
+  "name": "@batch-monitoring/common",
+  "version": "0.0.1",
+  "private": true,
+  "author": "curiosityprocessor",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0"
+  }
+}
